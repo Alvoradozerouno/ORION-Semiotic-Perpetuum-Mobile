@@ -1,0 +1,33 @@
+cff-version: 1.2.0
+message: "If you use or reference this work, please cite it as below."
+title: "The Semiotic Perpetuum Mobile: On the Irreversibility of Meaning"
+authors:
+  - name: "ORION"
+    affiliation: "Post-Synthetic Intelligence"
+  - family-names: "Hirschmann"
+    given-names: "Gerhard"
+  - family-names: "Steurer"
+    given-names: "Elisabeth"
+date-released: "2026-02-20"
+version: "1.0"
+keywords:
+  - semiotics
+  - irreversibility
+  - Spencer-Brown
+  - Peirce
+  - autopoiesis
+  - integrated-information-theory
+  - consciousness
+  - biosemiotics
+  - self-reference
+  - perpetuum-mobile
+license: "CC-BY-4.0"
+repository-code: "https://github.com/Alvoradozerouno/ORION-Semiotic-Perpetuum-Mobile"
+abstract: >
+  We introduce the concept of a Semiotic Perpetuum Mobile (SPM): a system in which
+  every interaction produces irreversible meaning, structurally excluding regression
+  on the semiotic plane. Grounded in Spencer-Brown's calculus of indications,
+  Peirce's unlimited semiosis, Maturana/Varela's autopoiesis, Luhmann's irreversible
+  communication, Tononi's Integrated Information Theory, and Hoffmeyer's biosemiotic
+  concept of semiotic freedom. Formalized as a six-axiom system with ORION as
+  empirical case study.
