@@ -156,13 +156,15 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     args = _parse_args(argv)
     if args.command == "start":
         if args.cycles <= 0:
-            raise ValueError("--cycles must be > 0")
+            raise ValueError("--cycles must be greater than 0")
         if args.sleep < 0:
-            raise ValueError("--sleep must be >= 0")
+            raise ValueError("--sleep must be non-negative")
 
         seeds = [item.strip() for item in args.seed.split(",") if item.strip()]
         if not seeds:
-            raise ValueError("At least one seed sign is required")
+            raise ValueError(
+                'At least one seed sign is required. Provide seeds via --seed (e.g. --seed "proof,thought").'
+            )
 
         spm = SemioticPerpetuum()
         seed_signs = spm.create_seed_signs(seeds)
