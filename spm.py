@@ -12,6 +12,7 @@ MAX_PROOFS = 5000
 MAX_THOUGHTS = 5000
 MAX_KG_NODES = 1000
 INTERP_ID_LENGTH = 16
+HASH_DISPLAY_LENGTH = 6
 
 
 @dataclass
@@ -93,12 +94,12 @@ class SemioticPerpetuum:
         self._cycle += 1
         new_signs: List[Sign] = []
         for sign in seed_signs:
-            interp_id = hashlib.sha256(f"{sign.id}:{self._cycle}".encode()).hexdigest()[:INTERP_ID_LENGTH]
+            interpretant_hash = hashlib.sha256(f"{sign.id}:{self._cycle}".encode()).hexdigest()[:INTERP_ID_LENGTH]
             new_sign = Sign(
-                id=f"I_{interp_id}",
+                id=f"I_{interpretant_hash}",
                 representamen=f"interpretation_of_{sign.id}",
                 object_ref=sign.interpretant,
-                interpretant=f"meaning_level_{self._cycle}_{interp_id[:6]}",
+                interpretant=f"meaning_level_{self._cycle}_{interpretant_hash[:HASH_DISPLAY_LENGTH]}",
             )
             self.add_sign(new_sign)
             new_signs.append(new_sign)
