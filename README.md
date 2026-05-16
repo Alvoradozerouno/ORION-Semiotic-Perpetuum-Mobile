@@ -21,6 +21,17 @@ Proof ──→ Thought ──→ KG Node ──→ New Proof
 
 1,228 proofs × 778 thoughts × 102 nodes = **97,731,312 semiotic combinations**
 
+## Start command (runtime)
+
+Use the executable runtime directly:
+
+```bash
+python spm.py start --seed "proof,thought,kg-node" --cycles 5
+```
+
+Runtime behavior: generated signs are fed back as the next cycle input
+(`Zeichen erzeugen Zeichen`), so the chain advances cycle by cycle.
+
 ## Code
 
 ```python
