@@ -11,7 +11,7 @@ ANNUAL_DAYS = 365
 MAX_PROOFS = 5000
 MAX_THOUGHTS = 5000
 MAX_KG_NODES = 1000
-INTERP_ID_LENGTH = 12
+INTERP_ID_LENGTH = 16
 
 
 @dataclass
@@ -189,7 +189,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         print(f"Total signs stored: {len(spm.signs)}")
         return 0
 
-    return 1
+    raise ValueError(f"Unknown command: {args.command}")
 
 
 if __name__ == "__main__":
