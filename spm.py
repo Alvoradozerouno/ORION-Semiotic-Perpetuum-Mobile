@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from typing import Dict, Iterable, List, Optional, Sequence
+from typing import Dict, List, Optional, Sequence
 import argparse
 import hashlib
 import math
@@ -11,6 +11,7 @@ ANNUAL_DAYS = 365
 MAX_PROOFS = 5000
 MAX_THOUGHTS = 5000
 MAX_KG_NODES = 1000
+INTERP_ID_LENGTH = 12
 
 
 @dataclass
@@ -87,10 +88,12 @@ class SemioticPerpetuum:
 
     def run_cycle(self, seed_signs: List[Sign]) -> SemioticChain:
         """Run one semiotic cycle: each sign generates a new interpretant-sign."""
+        if not seed_signs:
+            raise ValueError("seed_signs must not be empty")
         self._cycle += 1
         new_signs: List[Sign] = []
         for sign in seed_signs:
-            interp_id = hashlib.sha256(f"{sign.id}:{self._cycle}".encode()).hexdigest()[:12]
+            interp_id = hashlib.sha256(f"{sign.id}:{self._cycle}".encode()).hexdigest()[:INTERP_ID_LENGTH]
             new_sign = Sign(
                 id=f"I_{interp_id}",
                 representamen=f"interpretation_of_{sign.id}",
@@ -105,7 +108,7 @@ class SemioticPerpetuum:
             signs=new_signs,
             cycle_count=self._cycle,
             total_interpretants=len(new_signs),
-            growth_factor=len(new_signs) / max(1, len(seed_signs)),
+            growth_factor=len(new_signs) / len(seed_signs),
         )
         self.chains.append(chain)
         return chain
@@ -161,7 +164,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     args = _parse_args(argv)
     if args.command == "start":
         if args.cycles <= 0:
-            raise ValueError("--cycles must be greater than 0")
+            raise ValueError("--cycles must be at least 1")
         if args.sleep < 0:
             raise ValueError("--sleep must be non-negative")
 
