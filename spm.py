@@ -7,6 +7,11 @@ import hashlib
 import math
 import time
 
+ANNUAL_DAYS = 365
+MAX_PROOFS = 5000
+MAX_THOUGHTS = 5000
+MAX_KG_NODES = 1000
+
 
 @dataclass
 class Sign:
@@ -60,13 +65,13 @@ class SemioticPerpetuum:
         kg_nodes: int,
     ) -> Dict[str, float]:
         current_combos = proof_count * thought_count * kg_nodes
-        max_combos = 5000 * 5000 * 1000
+        max_combos = MAX_PROOFS * MAX_THOUGHTS * MAX_KG_NODES
         richness = math.log1p(current_combos) / math.log1p(max_combos)
         explored = min(current_combos, max_combos)
         novelty = 1.0 - (explored / max_combos)
-        proof_rate = proof_count / 365
-        thought_rate = thought_count / 365
-        kg_rate = kg_nodes / 365
+        proof_rate = proof_count / ANNUAL_DAYS
+        thought_rate = thought_count / ANNUAL_DAYS
+        kg_rate = kg_nodes / ANNUAL_DAYS
         marginal = (
             proof_rate * thought_count * kg_nodes
             + thought_rate * proof_count * kg_nodes
@@ -76,7 +81,7 @@ class SemioticPerpetuum:
             "current_combinations": current_combos,
             "semiotic_richness": round(richness, 4),
             "novelty_fraction": round(novelty, 4),
-            "marginal_output_norm": round(min(1.0, marginal * 365), 4),
+            "marginal_output_norm": round(min(1.0, marginal * ANNUAL_DAYS), 4),
             "perpetuum_score": round((richness + novelty) / 2, 4),
         }
 
